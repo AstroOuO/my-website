@@ -10,5 +10,19 @@ export const MediaBlock: Block = {
       relationTo: 'media',
       required: true,
     },
+    {
+      name: 'scale',
+      type: 'number',
+      admin: {
+        components: {
+          Field: '@/fields/ImageScale#ImageScaleField',
+        },
+        description: 'Scale the image size as a percentage of its container width.',
+        step: 5,
+      },
+      defaultValue: 100,
+      max: 200,
+      min: 25,
+    },
   ],
 }

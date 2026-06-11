@@ -543,6 +543,10 @@ export interface ContentBlock {
  */
 export interface MediaBlock {
   media: number | Media;
+  /**
+   * Scale the image size as a percentage of its container width.
+   */
+  scale?: number | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -1160,6 +1164,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
  */
 export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
+  scale?: T;
   id?: T;
   blockName?: T;
 }

@@ -25,6 +25,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
     enableGutter = true,
     imgClassName,
     media,
+    scale,
     staticImage,
     disableInnerContainer,
   } = props
@@ -43,11 +44,16 @@ export const MediaBlock: React.FC<Props> = (props) => {
       )}
     >
       {(media || staticImage) && (
-        <Media
-          imgClassName={cn('border border-border rounded-xl', imgClassName)}
-          resource={media}
-          src={staticImage}
-        />
+        <div
+          className={cn(scale && scale !== 100 && 'mx-auto')}
+          style={scale && scale !== 100 ? { maxWidth: `${scale}%` } : undefined}
+        >
+          <Media
+            imgClassName={cn('border border-border rounded-xl', imgClassName)}
+            resource={media}
+            src={staticImage}
+          />
+        </div>
       )}
       {caption && (
         <div
