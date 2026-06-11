@@ -1,6 +1,7 @@
 import { Banner } from '@payloadcms/ui/elements/Banner'
 import React from 'react'
 
+import { GenerateTrackPostsButton } from './GenerateTrackPostsButton'
 import { SeedButton } from './SeedButton'
 import './index.scss'
 
@@ -51,6 +52,12 @@ const BeforeDashboard: React.FC = () => {
         </li>
         <li>
           Commit and push your changes to the repository to trigger a redeployment of your project.
+        </li>
+        <li>
+          <GenerateTrackPostsButton />
+          {
+            ' to create a draft post for each media item that doesn’t have one yet, using the "ars" post as a layout template.'
+          }
         </li>
       </ul>
       {'Pro Tip: This block is a '}

@@ -201,7 +201,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | ButtonGridBlock | GalleryBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -787,6 +787,89 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ButtonGridBlock".
+ */
+export interface ButtonGridBlock {
+  /**
+   * How many buttons appear per row on larger screens.
+   */
+  columns?: ('1' | '2' | '3' | '4') | null;
+  buttons?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        color?: ('default' | 'secondary' | 'outline' | 'ghost' | 'destructive') | null;
+        /**
+         * Optional icon shown after the label.
+         */
+        icon?:
+          | (
+              | 'arrowRight'
+              | 'calendar'
+              | 'check'
+              | 'download'
+              | 'externalLink'
+              | 'facebook'
+              | 'fileText'
+              | 'github'
+              | 'globe'
+              | 'heart'
+              | 'instagram'
+              | 'linkedin'
+              | 'mail'
+              | 'mapPin'
+              | 'messageCircle'
+              | 'phone'
+              | 'play'
+              | 'send'
+              | 'shoppingCart'
+              | 'star'
+              | 'twitter'
+              | 'youtube'
+            )
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'buttonGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  /**
+   * How many items appear per row on larger screens.
+   */
+  columns?: ('2' | '3' | '4') | null;
+  items?:
+    | {
+        media: number | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1093,6 +1176,8 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        buttonGrid?: T | ButtonGridBlockSelect<T>;
+        gallery?: T | GalleryBlockSelect<T>;
       };
   meta?:
     | T
@@ -1190,6 +1275,47 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ButtonGridBlock_select".
+ */
+export interface ButtonGridBlockSelect<T extends boolean = true> {
+  columns?: T;
+  buttons?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        color?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock_select".
+ */
+export interface GalleryBlockSelect<T extends boolean = true> {
+  columns?: T;
+  items?:
+    | T
+    | {
+        media?: T;
+        caption?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1807,6 +1933,21 @@ export interface CodeBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'code';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EmbedBlock".
+ */
+export interface EmbedBlock {
+  /**
+   * Paste a URL, or the full <iframe> embed code (e.g. from a YouTube/Vimeo "Share > Embed" dialog, Figma, CodePen, or Google Maps).
+   */
+  embedCode: string;
+  aspectRatio: '16/9' | '4/3' | '1/1' | '9/16';
+  caption?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'embed';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

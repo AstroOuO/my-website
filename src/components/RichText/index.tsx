@@ -15,16 +15,30 @@ import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 
 import type {
   BannerBlock as BannerBlockProps,
+  ButtonGridBlock as ButtonGridBlockProps,
   CallToActionBlock as CTABlockProps,
+  EmbedBlock as EmbedBlockProps,
+  GalleryBlock as GalleryBlockProps,
   MediaBlock as MediaBlockProps,
 } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
+import { ButtonGridBlock } from '@/blocks/ButtonGrid/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
+import { EmbedBlock } from '@/blocks/Embed/Component'
+import { GalleryBlock } from '@/blocks/Gallery/Component'
 import { cn } from '@/utilities/ui'
 
 type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps>
+  | SerializedBlockNode<
+      | CTABlockProps
+      | MediaBlockProps
+      | BannerBlockProps
+      | CodeBlockProps
+      | EmbedBlockProps
+      | ButtonGridBlockProps
+      | GalleryBlockProps
+    >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   const { value, relationTo } = linkNode.fields.doc!
@@ -52,6 +66,9 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     ),
     code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
+    embed: ({ node }) => <EmbedBlock className="col-start-2" {...node.fields} />,
+    buttonGrid: ({ node }) => <ButtonGridBlock {...node.fields} />,
+    gallery: ({ node }) => <GalleryBlock {...node.fields} />,
   },
 })
 
