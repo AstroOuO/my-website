@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 
 import type { Page } from '@/payload-types'
 
+import { AboutMeBlock } from '@/blocks/AboutMe/Component'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { ButtonGridBlock } from '@/blocks/ButtonGrid/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
@@ -11,6 +12,7 @@ import { GalleryBlock } from '@/blocks/Gallery/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 
 const blockComponents = {
+  aboutMe: AboutMeBlock,
   archive: ArchiveBlock,
   buttonGrid: ButtonGridBlock,
   content: ContentBlock,

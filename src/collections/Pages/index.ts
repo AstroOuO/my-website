@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import { AboutMe } from '../../blocks/AboutMe/config'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { ButtonGrid } from '../../blocks/ButtonGrid/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
@@ -74,7 +75,16 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, ButtonGrid, Gallery],
+              blocks: [
+                AboutMe,
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                FormBlock,
+                ButtonGrid,
+                Gallery,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,
